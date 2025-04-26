@@ -6,17 +6,19 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Environment Variables](#environment variables)
+- [Requirements](#requirements)
+- [Running the Collection](#running the collection)
+
 
 ## Introduction
 
-Restfull Booker is a booking application that provides various banking services and features. This repository contains the source code forbooking application.
+- This repository contains a complete **Postman collection** for testing the **Restful-Booker** API.
+- It includes authentication, creating bookings, retrieving bookings, updating, and deleting bookings.  
+- Each request has detailed test scripts for validating response structure, response times, status codes, and data integrity.
+
 
 ## Examples
-
 
 ### Local testing execution example
 
@@ -24,36 +26,44 @@ Restfull Booker is a booking application that provides various banking services 
 
 ## Features
 
-- *User Authentication*: Create and manage bank accounts.
-- *Create Booking*: Perform transactions such as deposits, withdrawals, and transfers.
-- *Update Booking Statements*: Generate account statements for a specific time period.
-- *Delete Booking*: Ensure secure and encrypted transactions.
+✅ Create authentication token (Auth - CreateToken)  
+✅ Create new bookings with randomized data  
+✅ Retrieve, update, and delete bookings dynamically  
+✅ Store and reuse data between requests (token, booking ID, etc.)  
+✅ Automated test scripts for:
+- Status code verification
+- Response time validation
+- Response body structure checks
+- Header validations
+- Field matching between request and response
 
-## Installation
+✅ Pre-request scripts for setting up random test data
 
-To set up the Restful Booker application locally, follow these steps:
 
-1. Clone the repository:
-*   git clone https://github.com/EsraaElkheshen/Restful-Booking-Project.git
-2. Navigate to the project directory:
-*   cd restful booker
-3. Install dependencies:
-*   npm install
-4. Configure the application:
+## Environment Variables
 
-* Update configuration files with necessary settings.
-5. Run the application:
-*   npm start
+- `{{URL}}` → Base URL for the API (e.g., `https://restful-booker.herokuapp.com`)
+- `{{token}}` → Token generated after login (used for updating and deleting bookings)
+- `{{bookingid}}` → Booking ID created dynamically
 
-## Usage
-* User Guide: Refer to the User Guide for detailed information on how to use the XYZ Bank application.
+The collection uses **collection variables** and **random data generation** for some fields like first name, last name, and dates.
 
-## Contributing
-* We welcome contributions from the community. To contribute to XYZ Bank, follow these steps:
+## Requirements
 
-## Fork the repository.
-* Create a new branch for your feature or bug fix.
-* Make your changes and submit a pull request.
+- **Postman** latest version installed
+- **Newman** (optional, for running tests from command line)
 
-## License
-* XYZ Bank is licensed under the MIT License.
+
+## Running the Collection
+
+### Option 1 — Import and Run from Postman
+
+1. Download the `Restful-Booker.postman_collection.json` file.
+2. Import the collection into Postman.
+3. Set up the required variables (Base URL, Token if needed).
+4. Run individual requests or the full collection using **Collection Runner**.
+
+### Option 2 — Run via Newman (Command Line)
+
+```bash
+newman run Restful-Booker.postman_collection.json
