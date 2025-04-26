@@ -6,9 +6,9 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Environment Variables](#environment Variables)
+- [Variables](#variables)
 - [Requirements](#requirements)
-- [Running The Collection](#running The Collection)
+- [RunningCollection](#runningCollection)
 
 
 ## Introduction
@@ -40,7 +40,7 @@
 ✅ Pre-request scripts for setting up random test data
 
 
-## Environment Variables
+## Variables
 
 - `{{URL}}` → Base URL for the API (e.g., `https://restful-booker.herokuapp.com`)
 - `{{token}}` → Token generated after login (used for updating and deleting bookings)
@@ -54,7 +54,7 @@ The collection uses **collection variables** and **random data generation** for 
 - **Newman** (optional, for running tests from command line)
 
 
-## Running The Collection
+## RunningCollection
 
 ### Option 1 — Import and Run from Postman
 
