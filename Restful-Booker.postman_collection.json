@@ -1,0 +1,1607 @@
+{
+	"info": {
+		"_postman_id": "cc21f700-1679-4f2a-8956-82589032d69c",
+		"name": "Restful-Booker",
+		"description": "# _**API documentation for API restful-booker**_\n\n<img src=\"https://content.pstmn.io/1f823bbe-51b1-45f5-8280-5d1d27f72330/aW1hZ2UucG5n\" width=\"280\" height=\"182\">\n\n### _**Features:**_\n\n- Create Auth\n    \n- Create Booking\n    \n- Get Booking\n    \n- Update Booking\n    \n- Delete Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13755881",
+		"_collection_link": "https://www.postman.com/esraaelkheshen53/workspace/rest-course/collection/13755881-cc21f700-1679-4f2a-8956-82589032d69c?action=share&source=collection_link&creator=13755881"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"userName\",\"admin\");\r",
+									"pm.globals.set(\"password\",\"password123\");\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).to.not.null;\r",
+									"    pm.expect(pm.response.code).to.not.undefined;\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"    pm.expect(typeof pm.response.code).to.be.eql('number');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Status Message\", function () {\r",
+									"    pm.expect(pm.response.status).to.not.null;\r",
+									"    pm.expect(pm.response.status).to.not.undefined;\r",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+									"    pm.expect(pm.response.status).to.be.oneOf([200,\"OK\"]);\r",
+									"    pm.expect(typeof pm.response.status).to.be.eql('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Time\", function () { \r",
+									"    pm.expect(pm.response.code).to.not.null;\r",
+									"    pm.expect(pm.response.code).to.not.undefined;\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Size\", function () {\r",
+									"    pm.expect(pm.response.code).to.not.null;\r",
+									"    pm.expect(pm.response.code).to.not.undefined;\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Token Details\",function(){\r",
+									"pm.expect(pm.response.json().token.length).not.to.be.undefined;\r",
+									"pm.expect(pm.response.json().token.length).not.to.be.null;\r",
+									"pm.expect(pm.response.json()).to.have.property(\"token\")\r",
+									"pm.expect(pm.response.json()).not.to.have.property(\"Token\")\r",
+									"pm.expect(typeof pm.response.json().token).not.to.eql('integer')\r",
+									"pm.expect(typeof pm.response.json().token).to.eql('string')\r",
+									"pm.expect(pm.response.json().token.length).to.have.greaterThan(10)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Add Token In Collection Variable\",function(){\r",
+									"pm.collectionVariables.set(\"token\",pm.response.json().token)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{userName}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth"
+							]
+						},
+						"description": "##### _**This Api is used to create a new auth token**_"
+					},
+					"response": [
+						{
+							"name": "Auth",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\" : \"{{userName}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1745669128&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=nQ%2BKhbgdAfhXfdprGdGnsDN%2Bw%2Bxn2V6Xm1Vi2oFs61g%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1745669128&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=nQ%2BKhbgdAfhXfdprGdGnsDN%2Bw%2Bxn2V6Xm1Vi2oFs61g%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"1b-qCYUPpZdm8+yiz/CEUGFxmiWP1U\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Apr 2025 12:05:28 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"df59b85e36207f9\"\n}"
+						}
+					]
+				}
+			],
+			"description": "**This Folder contins Api that uses to create a new auth token to use for accessing** _**\" Update Booking \" and \"Delete Booking\"**_"
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Create Booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Set Variables\r",
+									"var responseBody = pm.response.json();\r",
+									"var requestBody =  JSON.parse(pm.request.body.raw);\r",
+									"pm.collectionVariables.set(\"firstName\", responseBody.booking.firstname); \r",
+									"pm.collectionVariables.set(\"lastName\", responseBody.booking.lastname);\r",
+									"pm.collectionVariables.set(\"depositpaid\", responseBody.booking.depositpaid);\r",
+									"pm.collectionVariables.set(\"totalprice\", responseBody.booking.totalprice);\r",
+									"pm.collectionVariables.set(\"checkin\", responseBody.booking.bookingdates.checkin);\r",
+									"pm.collectionVariables.set(\"checkout\", responseBody.booking.bookingdates.checkout);\r",
+									"pm.collectionVariables.set(\"additionalneeds\", responseBody.booking.additionalneeds);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Adding Booking Id To Collection Variable\", function () {\r",
+									"\tpm.collectionVariables.set(\"bookingid\", responseBody.bookingid)\r",
+									"  console.log(\"BookingId : \"+responseBody.bookingid);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Status Code\", function () {\r",
+									"\tpm.expect(pm.response.code).to.not.null;\r",
+									"\tpm.expect(pm.response.code).to.not.undefined;\r",
+									"\tpm.expect(pm.response.code).to.be.eql(200);\r",
+									"\tpm.expect(typeof pm.response.code).to.be.eql('number');\r",
+									"    console.log(pm.response.code);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Status Message\", function () {\r",
+									"\tpm.expect(pm.response.status).to.not.null;\r",
+									"\tpm.expect(pm.response.status).to.not.undefined;\r",
+									"\tpm.expect(pm.response.status).to.eql(\"OK\");\r",
+									"\tpm.expect(pm.response.status).to.be.oneOf([200, \"OK\"]);\r",
+									"\tpm.expect(typeof pm.response.status).to.be.eql('string');\r",
+									"    console.log(pm.response.status);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Time\", function () {\r",
+									"\tpm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"    console.log(pm.response.responseTime);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Size\", function () {\r",
+									"\tpm.expect(pm.response.responseSize).to.be.below(1000);\r",
+									"    console.log(pm.response.responseSize);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Firstname\", function () {\r",
+									"    pm.expect(responseBody.booking.firstname).to.equal(requestBody.firstname);\r",
+									"\tpm.expect(responseBody.booking.firstname).not.be.null;\r",
+									"\tpm.expect(typeof responseBody.booking.firstname).to.be.eql('string');\r",
+									"     console.log(\"FirstName In Reuest : \" +requestBody.firstname);\r",
+									"     console.log(\"FirstName In Response : \" +responseBody.booking.firstname);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains lastName\", function () {\r",
+									"\tpm.expect(responseBody.booking.lastname).not.be.undefined;\r",
+									"\tpm.expect(responseBody.booking.lastname).not.be.null;\r",
+									"\tpm.expect(responseBody.booking.lastname).to.equal(requestBody.lastname);\r",
+									"\tpm.expect(typeof responseBody.booking.lastname).to.be.equal('string');\r",
+									"    console.log(\"lastname In Reuest : \" +requestBody.lastname);\r",
+									"    console.log(\"lastname In Response : \" +responseBody.booking.lastname);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains TotalPrice\", function () {\r",
+									"\tpm.expect(responseBody.booking.totalprice).not.be.undefined;\r",
+									"\tpm.expect(responseBody.booking.totalprice).not.be.null;\r",
+									"    pm.expect(responseBody.booking.totalprice).to.equal(requestBody.totalprice);\r",
+									"\tpm.expect(typeof responseBody.booking.totalprice).to.be.equal('number');\r",
+									"    console.log(\"totalprice In Reuest : \" +requestBody.totalprice);\r",
+									"    console.log(\"totalprice In Response : \" +responseBody.booking.totalprice);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Depositpaid\", function () {\r",
+									"\tpm.expect(responseBody.booking.depositpaid).not.be.undefined;\r",
+									"\tpm.expect(responseBody.booking.depositpaid).not.be.null;\r",
+									"\tpm.expect(responseBody.booking.depositpaid).to.equal(requestBody.depositpaid);\r",
+									"\tpm.expect(typeof responseBody.booking.depositpaid).to.be.equal('boolean');\r",
+									"    console.log(\"depositpaid In Reuest : \" +requestBody.depositpaid);\r",
+									"    console.log(\"depositpaid In Response : \" +responseBody.booking.depositpaid);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains BookingDates and is Object\", function () {\r",
+									"\tpm.expect(responseBody.booking.bookingdates).not.be.undefined;\r",
+									"\tpm.expect(responseBody.booking.bookingdates).not.be.null;\r",
+									"\tpm.expect(typeof responseBody.booking.bookingdates).to.equal('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Checkin is before Checkout\", function () {\r",
+									"    pm.expect(new Date (requestBody.bookingdates.checkin)).to.be.lessThan(new Date (requestBody.bookingdates.checkout));\r",
+									"     console.log(\"checkin In Reuest : \" +requestBody.bookingdates.checkin);\r",
+									"     console.log(\"checkin In Response : \" +responseBody.booking.bookingdates.checkin);\r",
+									"     console.log(\"checkout In Reuest : \" +requestBody.bookingdates.checkout);\r",
+									"     console.log(\"checkout In Response : \" +responseBody.booking.bookingdates.checkout);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check bookingdates Contains CheckIn In Body\", function () {\r",
+									"\tpm.expect(responseBody.booking.bookingdates.checkin).not.be.undefined;\r",
+									"\tpm.expect(responseBody.booking.bookingdates.checkin).not.be.null;\r",
+									"\tpm.expect(responseBody.booking.bookingdates.checkin).to.equal(new Date (requestBody.bookingdates.checkin).toISOString().split('T')[0]);\r",
+									"\tpm.expect(typeof responseBody.booking.bookingdates.checkin).to.be.equal('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check bookingdates Contains CheckOut In Body\", function () {\r",
+									"\tpm.expect(responseBody.booking.bookingdates.checkout).not.be.undefined;\r",
+									"\tpm.expect(responseBody.booking.bookingdates.checkout).not.be.null;\r",
+									"\tpm.expect(responseBody.booking.bookingdates.checkout).to.equal(new Date (requestBody.bookingdates.checkout).toISOString().split('T')[0]);\r",
+									"\tpm.expect(typeof responseBody.booking.bookingdates.checkout).to.be.equal('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Additional Details\", function () {\r",
+									"\tpm.expect(responseBody.booking.additionalneeds).not.be.null;\r",
+									"\tpm.expect(responseBody.booking.additionalneeds).not.be.undefined;\r",
+									"\tpm.expect(responseBody.booking.additionalneeds).to.equal(requestBody.additionalneeds);\r",
+									"\tpm.expect(typeof responseBody.booking.additionalneeds).to.be.equal('string');\r",
+									"    console.log(\"checkout In Reuest : \" +requestBody.additionalneeds);\r",
+									"    console.log(\"checkout In Response : \" +responseBody.booking.additionalneeds);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Header In Response\", function () {\r",
+									"\tpm.expect(pm.response.headers.get(\"Content-Type\")).not.be.null;\r",
+									"\tpm.expect(pm.response.headers.get(\"Content-Type\")).not.be.undefined;\r",
+									"\tpm.expect(pm.response.headers.get(\"Content-Type\")).to.be.eql(\"application/json; charset=utf-8\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//random additional needs\r",
+									"let needs = [\"Breakfast\", \"Lunch\", \"Dinner\"];\r",
+									"// Pick a random one\r",
+									"let randomNeed = needs[Math.floor(Math.random() * needs.length)];\r",
+									"// Set it as a collection/environment variable\r",
+									"pm.collectionVariables.set(\"additionalneeds\", randomNeed);\r",
+									"\r",
+									"\r",
+									"//Random checkin date and checkout \r",
+									"function randomDate(start, end) {\r",
+									"    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));\r",
+									"}\r",
+									"const minDate = new Date(\"1990-01-01\");\r",
+									"const maxDate = new Date(\"1999-12-31\");\r",
+									"let checkin = randomDate(minDate, maxDate);\r",
+									"let checkout;\r",
+									"\r",
+									"do {\r",
+									"    checkout = randomDate(minDate, new Date(\"1999-12-31\"));\r",
+									"} while (checkout > checkin); // Ensure checkout is after checkin\r",
+									"\r",
+									"function formatDate(date) {\r",
+									"    return date.toISOString().split('T')[0]; // format: YYYY-MM-DD\r",
+									"}\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"{{$randomFirstName}}\",\r\n    \"lastname\" : \"{{$randomLastName}}\",\r\n    \"totalprice\" : {{$randomInt}},\r\n    \"depositpaid\" : {{$randomBoolean}},\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"{{checkin}}\",\r\n        \"checkout\" : \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\" : \"{{additionalneeds}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/booking",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"booking"
+							]
+						},
+						"description": "##### _**This Api is used to create a new booking**_"
+					},
+					"response": [
+						{
+							"name": "Create Booking",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"{{$randomFirstName}}\",\r\n    \"lastname\" : \"{{$randomLastName}}\",\r\n    \"totalprice\" : {{$randomInt}},\r\n    \"depositpaid\" : {{$randomBoolean}},\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"{{checkin}}\",\r\n        \"checkout\" : \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\" : \"{{additionalneeds}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/booking",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"booking"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1745669136&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=bgdKbiBolCjgfbeFVH6aQtroIPQEiiO%2FP6JJN0EpM%2F4%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1745669136&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=bgdKbiBolCjgfbeFVH6aQtroIPQEiiO%2FP6JJN0EpM%2F4%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"c5-CEQetmyZ6czsRmJ/zs6iaIU8rFI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Apr 2025 12:05:36 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bookingid\": 1981,\n    \"booking\": {\n        \"firstname\": \"Charley\",\n        \"lastname\": \"Jast\",\n        \"totalprice\": 591,\n        \"depositpaid\": true,\n        \"bookingdates\": {\n            \"checkin\": \"1991-03-17\",\n            \"checkout\": \"1997-04-22\"\n        },\n        \"additionalneeds\": \"Dinner\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody=pm.response.json();\r",
+									"\r",
+									"pm.test(\"Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).to.not.null;\r",
+									"    pm.expect(pm.response.code).to.not.undefined;\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"    pm.expect(typeof pm.response.code).to.be.eql('number');\r",
+									"    console.log(\"Code in Response : \" +pm.response.code);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Status Message\", function () {\r",
+									"    pm.expect(pm.response.status).to.not.null;\r",
+									"    pm.expect(pm.response.status).to.not.undefined;\r",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+									"    pm.expect(pm.response.status).to.be.oneOf([200,\"OK\"]);\r",
+									"    pm.expect(typeof pm.response.status).to.be.eql('string');\r",
+									"    console.log(\"Status in Response : \" +pm.response.status);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Time\", function () { \r",
+									"    pm.expect(pm.response.responseTime).to.not.null;\r",
+									"    pm.expect(pm.response.responseTime).to.not.undefined;\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"    console.log(\"responseTime in Response : \" +pm.response.responseTime);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Size\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.not.null;\r",
+									"    pm.expect(pm.response.responseSize).to.not.undefined;\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(1000);\r",
+									"    console.log(\"responseSize in Response : \" +pm.response.responseSize);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Firstname\", function () {\r",
+									"    pm.expect(responseBody.firstname).not.be.undefined;\r",
+									"    pm.expect(responseBody.firstname).to.not.be.null;\r",
+									"    pm.expect(responseBody.firstname).to.equal(pm.collectionVariables.get(\"firstName\"));\r",
+									"    pm.expect(typeof responseBody.firstname).to.be.equal('string');\r",
+									"    console.log(\"firstname in Response : \" +responseBody.firstname);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains lastName\", function () {\r",
+									"    pm.expect(responseBody.lastname).not.be.undefined;\r",
+									"    pm.expect(responseBody.lastname).not.be.null;\r",
+									"    pm.expect(responseBody.lastname).to.equal(pm.collectionVariables.get(\"lastName\"));\r",
+									"    pm.expect(typeof responseBody.lastname).to.be.equal('string');\r",
+									"    console.log(\"lastname in Response : \" +responseBody.lastname);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains TotalPrice\", function () {\r",
+									"    pm.expect(responseBody.totalprice).not.be.undefined;\r",
+									"    pm.expect(responseBody.totalprice).not.be.null;\r",
+									"    pm.expect(responseBody.totalprice).to.equal(pm.collectionVariables.get(\"totalprice\"));\r",
+									"    pm.expect(typeof responseBody.totalprice).to.be.equal('number');\r",
+									"    console.log(\"totalprice in Response : \" +responseBody.totalprice);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Depositpaid\", function () {\r",
+									"    pm.expect(responseBody.depositpaid).not.be.undefined;\r",
+									"    pm.expect(responseBody.depositpaid).not.be.null;\r",
+									"    pm.expect(responseBody.depositpaid).to.be.eql(pm.collectionVariables.get(\"depositpaid\"));\r",
+									"    pm.expect(typeof responseBody.depositpaid).to.be.equal('boolean');\r",
+									"    console.log(\"depositpaid in Response : \" +responseBody.depositpaid);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains BookingDates and is Object\", function () {\r",
+									"    pm.expect(responseBody.bookingdates).not.be.undefined;\r",
+									"    pm.expect(responseBody.bookingdates).not.be.null;\r",
+									"    pm.expect(typeof responseBody.bookingdates).to.equal('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check bookingdates Contains CheckIn In Body\", function () {\r",
+									"    pm.expect(responseBody.bookingdates.checkin).not.be.undefined;\r",
+									"    pm.expect(responseBody.bookingdates.checkin).not.be.null;\r",
+									"    pm.expect(responseBody.bookingdates.checkin).to.be.equal(pm.collectionVariables.get(\"checkin\"));\r",
+									"    pm.expect(typeof responseBody.bookingdates.checkin).to.be.equal('string');\r",
+									"    console.log(\"checkin in Response : \" +responseBody.bookingdates.checkin);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has all expected keys\", function () {\r",
+									"    pm.expect(responseBody).to.have.all.keys(\r",
+									"        \"firstname\",\r",
+									"        \"lastname\",\r",
+									"        \"totalprice\",\r",
+									"        \"depositpaid\",\r",
+									"        \"bookingdates\",\r",
+									"        \"additionalneeds\"\r",
+									"    );\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check bookingdates Contains CheckOut In Body\", function () {\r",
+									"    pm.expect(responseBody.bookingdates.checkout).not.be.undefined;\r",
+									"    pm.expect(responseBody.bookingdates.checkout).not.be.null;\r",
+									"    pm.expect(responseBody.bookingdates.checkout).to.be.equal(pm.collectionVariables.get(\"checkout\"));\r",
+									"    pm.expect(typeof responseBody.bookingdates.checkout).to.be.equal('string');\r",
+									"    console.log(\"checkout in Response : \" +responseBody.bookingdates.checkout);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Additional Details\", function () {\r",
+									"    pm.expect(responseBody.additionalneeds).not.be.null;\r",
+									"    pm.expect(responseBody.additionalneeds).not.be.undefined;\r",
+									"    pm.expect(responseBody.additionalneeds).to.be.equal(pm.collectionVariables.get(\"additionalneeds\"))\r",
+									"    pm.expect(typeof responseBody.additionalneeds).to.be.equal('string');\r",
+									"    console.log(\"additionalneeds In Response : \" +responseBody.additionalneeds);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Header In Response\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).not.be.null;\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).not.be.undefined;\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.eql(\"application/json; charset=utf-8\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/booking/{{bookingid}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingid}}"
+							]
+						},
+						"description": "##### _**This Api is used to retrieve all data after creating booking**_"
+					},
+					"response": [
+						{
+							"name": "Get Booking",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/booking/{{bookingid}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"booking",
+										"{{bookingid}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1745669144&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=I23oZNZB%2FrpUPh3Zl9SMFP57sZE7e8T6aHp31WVxGxk%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1745669144&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=I23oZNZB%2FrpUPh3Zl9SMFP57sZE7e8T6aHp31WVxGxk%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "168"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"a8-0rC3Q/5ZQIpgHdHztKhEbYvL9/U\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Apr 2025 12:05:44 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"firstname\": \"Charley\",\n    \"lastname\": \"Jast\",\n    \"totalprice\": 591,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"1991-03-17\",\n        \"checkout\": \"1997-04-22\"\n    },\n    \"additionalneeds\": \"Dinner\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//random additional needs\r",
+									"let needs = [\"Breakfast-Meal\", \"Lunch-Meal\", \"Dinner-Meal\"];\r",
+									"// Pick a random one\r",
+									"let randomNeed = needs[Math.floor(Math.random() * needs.length)];\r",
+									"// Set it as a collection/environment variable\r",
+									"pm.collectionVariables.set(\"additionalneeds\", randomNeed);\r",
+									"\r",
+									"\r",
+									"//Random checkin date and checkout \r",
+									"function randomDate(start, end) {\r",
+									"    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));\r",
+									"}\r",
+									"const minDate = new Date(\"1990-01-01\");\r",
+									"const maxDate = new Date(\"1999-12-31\");\r",
+									"let checkin = randomDate(minDate, maxDate);\r",
+									"let checkout;\r",
+									"\r",
+									"do {\r",
+									"    checkout = randomDate(minDate, new Date(\"1999-12-31\"));\r",
+									"} while (checkout <= checkin); // Ensure checkout is after checkin\r",
+									"\r",
+									"function formatDate(date) {\r",
+									"    return date.toISOString().split('T')[0]; // format: YYYY-MM-DD\r",
+									"}\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = pm.response.json();\r",
+									"var requestBody =  JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"pm.collectionVariables.set(\"firstName\", responseBody.firstname); \r",
+									"pm.collectionVariables.set(\"lastName\", responseBody.lastname);\r",
+									"pm.collectionVariables.set(\"depositpaid\", responseBody.depositpaid);\r",
+									"pm.collectionVariables.set(\"totalprice\", responseBody.totalprice);\r",
+									"pm.collectionVariables.set(\"checkin\", responseBody.bookingdates.checkin);\r",
+									"pm.collectionVariables.set(\"checkout\", responseBody.bookingdates.checkout);\r",
+									"pm.collectionVariables.set(\"additionalneeds\", responseBody.additionalneeds); \r",
+									"\r",
+									"pm.test(\"Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).to.not.null;\r",
+									"    pm.expect(pm.response.code).to.not.undefined;\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"    pm.expect(typeof pm.response.code).to.be.eql('number');\r",
+									"\t\tconsole.log(\"Response Code : \"+pm.response.code);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Status Message\", function () {\r",
+									"    pm.expect(pm.response.status).to.not.null;\r",
+									"    pm.expect(pm.response.status).to.not.undefined;\r",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+									"    pm.expect(pm.response.status).to.be.oneOf([200,\"OK\"]);\r",
+									"    pm.expect(typeof pm.response.status).to.be.equal('string');\r",
+									"\t\tconsole.log(\"Response Status : \"+pm.response.Status);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Time\", function () { \r",
+									"    pm.expect(pm.response.responseTime).to.not.null;\r",
+									"    pm.expect(pm.response.responseTime).to.not.undefined;\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"\t\tconsole.log(\"Response Time : \"+pm.response.responseTime);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Size\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.not.null;\r",
+									"    pm.expect(pm.response.responseSize).to.not.undefined;\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(1000);\r",
+									"\t\tconsole.log(\"Response Size : \"+pm.response.responseTime)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Firstname\", function () {\r",
+									"  pm.expect(responseBody.firstname).to.equal(requestBody.firstname);\r",
+									"\tpm.expect(responseBody.firstname).not.be.null;\r",
+									"\tpm.expect(typeof responseBody.firstname).to.be.eql('string');\r",
+									"  console.log(\"FirstName In Reuest : \" +requestBody.firstname);\r",
+									"  console.log(\"FirstName In Response : \" +responseBody.firstname);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains lastName\", function () {\r",
+									"\tpm.expect(responseBody.lastname).not.be.undefined;\r",
+									"\tpm.expect(responseBody.lastname).not.be.null;\r",
+									"\tpm.expect(responseBody.lastname).to.equal(requestBody.lastname);\r",
+									"\tpm.expect(typeof responseBody.lastname).to.be.equal('string');\r",
+									"  console.log(\"lastname In Reuest : \" +requestBody.lastname);\r",
+									"  console.log(\"lastname In Response : \" +responseBody.lastname);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains TotalPrice\", function () {\r",
+									"\tpm.expect(responseBody.totalprice).not.be.undefined;\r",
+									"\tpm.expect(responseBody.totalprice).not.be.null;\r",
+									"  pm.expect(responseBody.totalprice).to.equal(requestBody.totalprice);\r",
+									"\tpm.expect(typeof responseBody.totalprice).to.be.equal('number');\r",
+									"  console.log(\"totalprice In Reuest : \" +requestBody.totalprice);\r",
+									"  console.log(\"totalprice In Response : \" +responseBody.totalprice);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Depositpaid\", function () {\r",
+									"\tpm.expect(responseBody.depositpaid).not.be.undefined;\r",
+									"\tpm.expect(responseBody.depositpaid).not.be.null;\r",
+									"\tpm.expect(responseBody.depositpaid).to.equal(requestBody.depositpaid);\r",
+									"\tpm.expect(typeof responseBody.depositpaid).to.be.equal('boolean');\r",
+									"  console.log(\"depositpaid In Reuest : \" +requestBody.depositpaid);\r",
+									"  console.log(\"depositpaid In Response : \" +responseBody.depositpaid);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains BookingDates and is Object\", function () {\r",
+									"\tpm.expect(responseBody.bookingdates).not.be.undefined;\r",
+									"\tpm.expect(responseBody.bookingdates).not.be.null;\r",
+									"\tpm.expect(typeof responseBody.bookingdates).to.equal('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Checkin is before Checkout\", function () {\r",
+									"    pm.expect(new Date (requestBody.bookingdates.checkin)).to.be.lessThan(new Date (requestBody.bookingdates.checkout));\r",
+									"     console.log(\"checkin In Reuest : \" +requestBody.bookingdates.checkin);\r",
+									"     console.log(\"checkin In Response : \" +responseBody.bookingdates.checkin);\r",
+									"     console.log(\"checkout In Reuest : \" +requestBody.bookingdates.checkout);\r",
+									"     console.log(\"checkout In Response : \" +responseBody.bookingdates.checkout);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check bookingdates Contains CheckIn In Body\", function () {\r",
+									"\tpm.expect(responseBody.bookingdates.checkin).not.be.undefined;\r",
+									"\tpm.expect(responseBody.bookingdates.checkin).not.be.null;\r",
+									"\tpm.expect(responseBody.bookingdates.checkin).to.equal(new Date (requestBody.bookingdates.checkin)\r",
+									"\t.toISOString().split('T')[0]);\r",
+									"\tpm.expect(typeof responseBody.bookingdates.checkin).to.be.equal('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check bookingdates Contains CheckOut In Body\", function () {\r",
+									"\tpm.expect(responseBody.bookingdates.checkout).not.be.undefined;\r",
+									"\tpm.expect(responseBody.bookingdates.checkout).not.be.null;\r",
+									"\tpm.expect(responseBody.bookingdates.checkout).to.equal(new Date(requestBody.bookingdates.checkout)\r",
+									"\t.toISOString().split('T')[0]);\r",
+									"\tpm.expect(typeof responseBody.bookingdates.checkout).to.be.equal('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Additional Details\", function () {\r",
+									"\tpm.expect(responseBody.additionalneeds).not.be.null;\r",
+									"\tpm.expect(responseBody.additionalneeds).not.be.undefined;\r",
+									"\tpm.expect(responseBody.additionalneeds).to.equal(requestBody.additionalneeds);\r",
+									"\tpm.expect(typeof responseBody.additionalneeds).to.be.equal('string');\r",
+									"  console.log(\"checkout In Reuest : \" +requestBody.additionalneeds);\r",
+									"  console.log(\"checkout In Response : \" +responseBody.additionalneeds);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Header In Response\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).not.be.null;\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).not.be.undefined;\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.eql(\"application/json; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has all expected keys\", function () {\r",
+									"    pm.expect(responseBody).to.have.all.keys(\r",
+									"        \"firstname\",\r",
+									"        \"lastname\",\r",
+									"        \"totalprice\",\r",
+									"        \"depositpaid\",\r",
+									"        \"bookingdates\",\r",
+									"        \"additionalneeds\"\r",
+									"    );\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"{{$randomFirstName}}\",\r\n    \"lastname\" : \"{{$randomLastName}}\",\r\n    \"totalprice\" : {{$randomInt}},\r\n    \"depositpaid\" : {{$randomBoolean}},\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"{{checkin}}\",\r\n        \"checkout\" : \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\" : \"{{additionalneeds}}\" \r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/booking/{{bookingid}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingid}}"
+							]
+						},
+						"description": "##### _**This Api is used to update current booking**_\n\n**Generated from** cURL: curl -X PUT  \n[https://restful-booker.herokuapp.com/booking/1](https://restful-booker.herokuapp.com/booking/1)  \n\\-H 'Content-Type: application/json'  \n\\-H 'Accept: application/json'  \n\\-H 'Cookie: token=abc123'  \n\\-d '{  \n\"firstname\" : \"James\",  \n\"lastname\" : \"Brown\",  \n\"totalprice\" : 111,  \n\"depositpaid\" : true,  \n\"bookingdates\" : {  \n\"checkin\" : \"2018-01-01\",  \n\"checkout\" : \"2019-01-01\"  \n},  \n\"additionalneeds\" : \"Breakfast\"  \n}'"
+					},
+					"response": [
+						{
+							"name": "Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "token={{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"{{$randomFirstName}}\",\r\n    \"lastname\" : \"{{$randomLastName}}\",\r\n    \"totalprice\" : {{$randomInt}},\r\n    \"depositpaid\" : {{$randomBoolean}},\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"{{checkin}}\",\r\n        \"checkout\" : \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\" : \"{{additionalneeds}}\" \r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/booking/{{bookingid}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"booking",
+										"{{bookingid}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1745669151&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=VjCxdn8%2F%2F7JUvMgcs7KEAYTCqdFGb7u2a5kBG6iMfL4%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1745669151&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=VjCxdn8%2F%2F7JUvMgcs7KEAYTCqdFGb7u2a5kBG6iMfL4%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"ad-xqmRrQP/a/8MHYq8WgZNDhfeCRk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Apr 2025 12:05:51 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"firstname\": \"Russel\",\n    \"lastname\": \"Bauch\",\n    \"totalprice\": 869,\n    \"depositpaid\": false,\n    \"bookingdates\": {\n        \"checkin\": \"1991-03-17\",\n        \"checkout\": \"1997-04-22\"\n    },\n    \"additionalneeds\": \"Lunch-Meal\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody=pm.response.json();\r",
+									"\r",
+									"pm.test(\"Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).to.not.null;\r",
+									"    pm.expect(pm.response.code).to.not.undefined;\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"    pm.expect(typeof pm.response.code).to.be.eql('number');\r",
+									"    console.log(\"Code in Response : \" +pm.response.code);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Status Message\", function () {\r",
+									"    pm.expect(pm.response.status).to.not.null;\r",
+									"    pm.expect(pm.response.status).to.not.undefined;\r",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+									"    pm.expect(pm.response.status).to.be.oneOf([200,\"OK\"]);\r",
+									"    pm.expect(typeof pm.response.status).to.be.eql('string');\r",
+									"    console.log(\"Status in Response : \" +pm.response.status);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Time\", function () { \r",
+									"    pm.expect(pm.response.responseTime).to.not.null;\r",
+									"    pm.expect(pm.response.responseTime).to.not.undefined;\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"    console.log(\"responseTime in Response : \" +pm.response.responseTime);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Size\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.not.null;\r",
+									"    pm.expect(pm.response.responseSize).to.not.undefined;\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(1000);\r",
+									"    console.log(\"responseSize in Response : \" +pm.response.responseSize);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Firstname\", function () {\r",
+									"    pm.expect(responseBody.firstname).not.be.undefined;\r",
+									"    pm.expect(responseBody.firstname).to.not.be.null;\r",
+									"    pm.expect(responseBody.firstname).to.equal(pm.collectionVariables.get(\"firstName\"));\r",
+									"    pm.expect(typeof responseBody.firstname).to.be.equal('string');\r",
+									"    console.log(\"firstname in Response : \" +responseBody.firstname);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains lastName\", function () {\r",
+									"    pm.expect(responseBody.lastname).not.be.undefined;\r",
+									"    pm.expect(responseBody.lastname).not.be.null;\r",
+									"    pm.expect(responseBody.lastname).to.equal(pm.collectionVariables.get(\"lastName\"));\r",
+									"    pm.expect(typeof responseBody.lastname).to.be.equal('string');\r",
+									"    console.log(\"lastname in Response : \" +responseBody.lastname);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains TotalPrice\", function () {\r",
+									"    pm.expect(responseBody.totalprice).not.be.undefined;\r",
+									"    pm.expect(responseBody.totalprice).not.be.null;\r",
+									"    pm.expect(responseBody.totalprice).to.equal(pm.collectionVariables.get(\"totalprice\"));\r",
+									"    pm.expect(typeof responseBody.totalprice).to.be.equal('number');\r",
+									"    console.log(\"totalprice in Response : \" +responseBody.totalprice);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Depositpaid\", function () {\r",
+									"    pm.expect(responseBody.depositpaid).not.be.undefined;\r",
+									"    pm.expect(responseBody.depositpaid).not.be.null;\r",
+									"    pm.expect(responseBody.depositpaid).to.be.eql(pm.collectionVariables.get(\"depositpaid\"));\r",
+									"    pm.expect(typeof responseBody.depositpaid).to.be.equal('boolean');\r",
+									"    console.log(\"depositpaid in Response : \" +responseBody.depositpaid);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains BookingDates and is Object\", function () {\r",
+									"    pm.expect(responseBody.bookingdates).not.be.undefined;\r",
+									"    pm.expect(responseBody.bookingdates).not.be.null;\r",
+									"    pm.expect(typeof responseBody.bookingdates).to.equal('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check bookingdates Contains CheckIn In Body\", function () {\r",
+									"    pm.expect(responseBody.bookingdates.checkin).not.be.undefined;\r",
+									"    pm.expect(responseBody.bookingdates.checkin).not.be.null;\r",
+									"    pm.expect(responseBody.bookingdates.checkin).to.be.equal(pm.collectionVariables.get(\"checkin\"));\r",
+									"    pm.expect(typeof responseBody.bookingdates.checkin).to.be.equal('string');\r",
+									"    console.log(\"checkin in Response : \" +responseBody.bookingdates.checkin);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has all expected keys\", function () {\r",
+									"    pm.expect(responseBody).to.have.all.keys(\r",
+									"        \"firstname\",\r",
+									"        \"lastname\",\r",
+									"        \"totalprice\",\r",
+									"        \"depositpaid\",\r",
+									"        \"bookingdates\",\r",
+									"        \"additionalneeds\"\r",
+									"    );\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check bookingdates Contains CheckOut In Body\", function () {\r",
+									"    pm.expect(responseBody.bookingdates.checkout).not.be.undefined;\r",
+									"    pm.expect(responseBody.bookingdates.checkout).not.be.null;\r",
+									"    pm.expect(responseBody.bookingdates.checkout).to.be.equal(pm.collectionVariables.get(\"checkout\"));\r",
+									"    pm.expect(typeof responseBody.bookingdates.checkout).to.be.equal('string');\r",
+									"    console.log(\"checkout in Response : \" +responseBody.bookingdates.checkout);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Additional Details\", function () {\r",
+									"    pm.expect(responseBody.additionalneeds).not.be.null;\r",
+									"    pm.expect(responseBody.additionalneeds).not.be.undefined;\r",
+									"    pm.expect(responseBody.additionalneeds).to.be.equal(pm.collectionVariables.get(\"additionalneeds\"))\r",
+									"    pm.expect(typeof responseBody.additionalneeds).to.be.equal('string');\r",
+									"    console.log(\"additionalneeds In Response : \" +responseBody.additionalneeds);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Header In Response\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).not.be.null;\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).not.be.undefined;\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.eql(\"application/json; charset=utf-8\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/booking/{{bookingid}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingid}}"
+							]
+						},
+						"description": "##### _**This Api is used to**_ _**retrieve all data after updating current booking**_"
+					},
+					"response": [
+						{
+							"name": "Get Booking",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/booking/{{bookingid}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"booking",
+										"{{bookingid}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1745669161&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=id%2FYUnrgS8UPngNTvIG6vm%2F3v95OLWHISFfdh7Tw8Ao%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1745669161&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=id%2FYUnrgS8UPngNTvIG6vm%2F3v95OLWHISFfdh7Tw8Ao%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"ad-xqmRrQP/a/8MHYq8WgZNDhfeCRk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Apr 2025 12:06:01 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"firstname\": \"Russel\",\n    \"lastname\": \"Bauch\",\n    \"totalprice\": 869,\n    \"depositpaid\": false,\n    \"bookingdates\": {\n        \"checkin\": \"1991-03-17\",\n        \"checkout\": \"1997-04-22\"\n    },\n    \"additionalneeds\": \"Lunch-Meal\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response;\r",
+									"\r",
+									"pm.test(\"Check Status Code\",function(){\r",
+									"    pm.expect(response.code).to.not.null;\r",
+									"    pm.expect(response.code).to.not.undefined;\r",
+									"    pm.expect(response.code).to.eql(201);\r",
+									"    pm.expect(typeof response.code).to.be.eql('number');\r",
+									"    console.log(\"response Code : \"+response.code);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Status Message\",function(){\r",
+									"    pm.expect(response.status).to.not.null;\r",
+									"    pm.expect(response.status).to.not.undefined;\r",
+									"    pm.expect(response.status).to.eql(\"Created\");\r",
+									"    pm.expect(typeof response.status).to.be.eql('string');\r",
+									"    console.log(\"response Status : \"+response.status);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Time\",function(){\r",
+									"    pm.expect(response.responseTime).to.not.null;\r",
+									"    pm.expect(response.responseTime).to.not.undefined;\r",
+									"    pm.expect(response.responseTime).to.below(2000);\r",
+									"    console.log(\"response Time : \"+response.responseTime);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Size\",function(){\r",
+									"    pm.expect(response.responseSize).to.not.null;\r",
+									"    pm.expect(response.responseSize).to.not.undefined;\r",
+									"    pm.expect(response.responseSize).to.below(1000);\r",
+									"    console.log(\"response Size : \"+response.responseSize);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Contains Created\",function(){\r",
+									"    pm.expect(response.text()).to.not.null;\r",
+									"    pm.expect(response.text()).to.include(\"Created\");\r",
+									"    console.log(\"Body: \"+ response.text());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/booking/{{bookingid}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingid}}"
+							]
+						},
+						"description": "##### _This API is used to delete an existing booking by its unique booking ID. Once the request is successfully processed, the booking is permanently removed from the system._  \n\n**Generated from** cURL: curl -X DELETE  \n[https://restful-booker.herokuapp.com/booking/1](https://restful-booker.herokuapp.com/booking/1)  \n\\-H 'Content-Type: application/json'  \n\\-H 'Cookie: token=abc123'"
+					},
+					"response": [
+						{
+							"name": "DeleteBooking",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "token={{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/booking/{{bookingid}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"booking",
+										"{{bookingid}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1745669174&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=plsXLnPixJzVSGeV26pdkI0HyCDc%2Fxa%2B%2FvM0AkA5ALo%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1745669174&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=plsXLnPixJzVSGeV26pdkI0HyCDc%2Fxa%2B%2FvM0AkA5ALo%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "7"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"7-rM9AyJuqT6iOan/xHh+AW+7K/T8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Apr 2025 12:06:14 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "Created"
+						}
+					]
+				},
+				{
+					"name": "Get Booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response;\r",
+									"pm.test(\"Check Status Code\", function () {\r",
+									"    pm.expect(response.code).to.be.eql(404);\r",
+									"    pm.expect(typeof response.code).to.be.eql('number');\r",
+									"    console.log(\"response Code : \"+response.code);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Status Message\", function () {\r",
+									"    pm.expect(response.status).to.eql(\"Not Found\");\r",
+									"    pm.expect(typeof response.status).to.be.eql('string');\r",
+									"    console.log(\"response Status : \"+response.status);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Time\", function () { \r",
+									"    pm.expect(response.responseTime).to.be.below(2000);\r",
+									"    console.log(\"response Time : \"+response.responseTime)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Response Size\", function () {\r",
+									"     console.log(\"response Size : \"+response.responseSize);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/booking/{{bookingid}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingid}}"
+							]
+						},
+						"description": "##### _This API is used to retrieve booking data after a booking has been deleted_"
+					},
+					"response": [
+						{
+							"name": "Get Booking",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/booking/{{bookingid}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"booking",
+										"{{bookingid}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1745669183&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=FEk2ViNSQ5fDfhzocvlVcsoKBZF8r%2Bb55fzSIknWKlI%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1745669183&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=FEk2ViNSQ5fDfhzocvlVcsoKBZF8r%2Bb55fzSIknWKlI%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Apr 2025 12:06:23 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				}
+			],
+			"description": "**This Folder provides endpoints to manage bookings in the system. It supports**\n\n- Create Booking\n    \n- Get Booking\n    \n- Update Booking,\n    \n- Deleting Booking"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": 621
+		},
+		{
+			"key": "firstName",
+			"value": "Winona"
+		},
+		{
+			"key": "lastName",
+			"value": "Osinski"
+		},
+		{
+			"key": "totalPrice",
+			"value": 727
+		},
+		{
+			"key": "token",
+			"value": "e1e660382b0ab81"
+		},
+		{
+			"key": "depositpaId",
+			"value": "true"
+		},
+		{
+			"key": "bookingid",
+			"value": 4942
+		},
+		{
+			"key": "additionalneeds",
+			"value": "Dinner"
+		},
+		{
+			"key": "checkin",
+			"value": "1991-03-17"
+		},
+		{
+			"key": "checkout",
+			"value": "1997-04-22"
+		},
+		{
+			"key": "totalprice",
+			"value": 831
+		},
+		{
+			"key": "depositpaid",
+			"value": true
+		}
+	]
+}
