@@ -6,9 +6,9 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Environment Variables](#environment variables)
+- [Environment Variables](#environment Variables)
 - [Requirements](#requirements)
-- [Running the Collection](#running the collection)
+- [Running The Collection](#running The Collection)
 
 
 ## Introduction
@@ -54,7 +54,7 @@ The collection uses **collection variables** and **random data generation** for 
 - **Newman** (optional, for running tests from command line)
 
 
-## Running the Collection
+## Running The Collection
 
 ### Option 1 — Import and Run from Postman
 
