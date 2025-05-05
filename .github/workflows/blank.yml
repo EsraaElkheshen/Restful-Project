@@ -1,0 +1,48 @@
+name: GithubActions
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '17.x'
+
+      # Install Newman and htmlextra reporter
+      - name: Install Newman and Reporter
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      # Debug: List files to verify paths
+      - name: Debug – List Files
+        run: ls -R
+
+      # Run Postman Collection with htmlextra reporter
+      - name: Run Newman Collection
+        run: |
+          newman run "Restful-Booker.postman_collection.json" \
+            -e "RestFull_Testing.postman_environment.json" \
+            -r htmlextra \
+            --reporter-htmlextra-export "SampleArtifact/report.html" || true
+
+      # Upload the HTML report as an artifact
+      - name: Publish Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Reports
+          path: SampleArtifact
